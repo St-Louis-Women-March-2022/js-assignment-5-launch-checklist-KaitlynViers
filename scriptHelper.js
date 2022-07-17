@@ -1,13 +1,13 @@
 // Write your helper functions here!
-//require('isomorphic-fetch');
+require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
   //fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
-    //   response.json().then(function (json) { 
+    //response.json().then(function (json) { 
            const missionTarget = document.getElementById('missionTarget');
 
-            missionTarget.innerHTML += `
+            missionTarget.innerHTML +=` 
             <div>
                 <h2>Mission Destination</h2>
                 <ol>
@@ -19,7 +19,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 </ol>
                 <img src="${imageUrl}">
                 </div>`
-       }
+}         
+       
 
 function validateInput(testInput) {
    document.addEventListener('submit', function(event) {
@@ -28,7 +29,7 @@ function validateInput(testInput) {
         const pilotName = document.querySelector('[name=pilotName').value;
         const copilotName = document.querySelector('[name=copilotName]').value;
         const fuelLevel = document.querySelector('[name=fuelLevel]').value;
-        const cargoMass = document.querySelector('[name=cargoMass]').value;
+        const cargoLevel = document.querySelector('[name=cargoLevel]').value;
             let emptyField = '';
             let nonAlpha = '';
             let nonNumeric = '';
@@ -125,8 +126,8 @@ function pickPlanet(planets) {
 }
 
 
-//module.exports.addDestinationInfo = addDestinationInfo;
-//module.exports.validateInput = validateInput;
-//module.exports.formSubmission = formSubmission;
-//module.exports.pickPlanet = pickPlanet; 
-//module.exports.myFetch = myFetch;
+module.exports.addDestinationInfo = addDestinationInfo;
+module.exports.validateInput = validateInput;
+module.exports.formSubmission = formSubmission;
+module.exports.pickPlanet = pickPlanet; 
+module.exports.myFetch = myFetch;
