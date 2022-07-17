@@ -2,24 +2,27 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-  //fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
-    //response.json().then(function (json) { 
-           const missionTarget = document.getElementById('missionTarget');
+    fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
+        response.json().then(function (json) {
+            const missionTarget = document.getElementById('missionTarget');
 
-            missionTarget.innerHTML +=` 
+            missionTarget.innerHTML +=`
             <div>
                 <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: ${name} </li>
-                    <li>Diameter: ${diameter} </li>
+                    <li>Name: ${name}</li>
+                    <li>Diameter: ${diameter}</li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: ${distance} </li>
-                    <li>Number of Moons: ${moons} </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="${imageUrl}">
-                </div>`
-}         
+                <img src= ${imageUrl}'></img>
+            </div>`
+        });
+    });
+}
+   // Here is the HTML formatting for our mission target div.
+        
        
 
 function validateInput(testInput) {
@@ -29,7 +32,7 @@ function validateInput(testInput) {
         const pilotName = document.querySelector('[name=pilotName').value;
         const copilotName = document.querySelector('[name=copilotName]').value;
         const fuelLevel = document.querySelector('[name=fuelLevel]').value;
-        const cargoLevel = document.querySelector('[name=cargoLevel]').value;
+        const cargoMass = document.querySelector('[name=cargoLevel]').value;
             let emptyField = '';
             let nonAlpha = '';
             let nonNumeric = '';
@@ -54,7 +57,7 @@ function validateInput(testInput) {
    });
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
    
         launchStatus.innerHTML += `
         <div>
@@ -71,7 +74,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
                         fuelStatus.innerHTML = `Fuel level high enough for launch`;
         }
 
-        if (cargoLevel <= 10000) {
+        if (cargoMass <= 10000) {
             faultyItem.style.visibility + 'visible';
                 launchStatus.innerHTML = `Shuttle is ready for launch`;
                     launchStatus.style.color = `green`;
@@ -96,8 +99,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     </div>`;
 }
 
-async function myFetch() {
-    let planetsReturned;
+async function myFetch(planetsReturned) {
 
     planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
         });
@@ -110,20 +112,24 @@ function pickPlanet(planets) {
         fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
             const missionTarget = document.getElementById('missionTarget');
                 let index = Math.floor(Math.random() * (plantaryData.length));
-                missionTarget.innerHTML += `
+                missionTarget.innerHTML +=`
                 <div>
-                <h2>Mission Destination</h2><ol>
+                <h2>Mission Destination</h2>
+                <ol>
                         <li>Name: ${planetaryData[index].name}</li>
-                        <li>Diameter: ${planetaryData[index].diameeter}</li>
+                        <li>Diameter: ${planetaryData[index].diameter}</li>
                         <li>Star: ${planetaryData[index].star}</li>
                         <li>Distance: ${planetaryData[index].distance}</li>
-                        <li>Moons: $planetaryData[index].moons</li>
-                    </ol><img id='missionTarget img' src $ {...planetaryData[index].image}></img>
-                <div> 
-                    `
+                        <li>Moons: ${planetaryData[index].moons}</li>
+                    </ol>
+                    <img id='missionTarget img' src ${planetaryData[index].image}></img>
+                </div>`
+               
+                    
         });
     });
 }
+   
 
 
 module.exports.addDestinationInfo = addDestinationInfo;
