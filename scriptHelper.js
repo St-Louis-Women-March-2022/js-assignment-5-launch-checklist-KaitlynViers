@@ -1,33 +1,32 @@
 // Write your helper functions here!
-require('isomorphic-fetch');
+//require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
-        response.json().then(function (json) {
+
             const missionTarget = document.getElementById('missionTarget');
 
             missionTarget.innerHTML +=`
             <div>
                 <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: ${name}</li>
+                    <li>Name: ${name} </li>
                     <li>Diameter: ${diameter}</li>
                     <li>Star: ${star}</li>
                     <li>Distance from Earth: ${distance}</li>
                     <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src= ${imageUrl}'></img>
+                <img src='${imageUrl}' ></img>
             </div>`
-        });
-    });
-}
+        }
+    
+
    // Here is the HTML formatting for our mission target div.
         
        
 
 function validateInput(testInput) {
    document.addEventListener('submit', function(event) {
-        event.preventDefault();
+        ;
 
         const pilotName = document.querySelector('[name=pilotName').value;
         const copilotName = document.querySelector('[name=copilotName]').value;
@@ -39,6 +38,7 @@ function validateInput(testInput) {
 
             if(!pilotName || !copilotName || !fuelLevel || !cargoMass) {
                 emptyField = "All fields must be filled in.";
+                event.preventDefault()
             }
 
             if (pilotName === Number || copilotName === Number) {
@@ -54,6 +54,7 @@ function validateInput(testInput) {
             }
 
             else {formSubmission(event, pilotName, coPilotName, fuelLevel, cargoMass);}
+            event.preventDefault()
    });
 }
 
@@ -99,41 +100,31 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     </div>`;
 }
 
-async function myFetch(planetsReturned) {
+async function myFetch(listedPlanets) {
 
     planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
+        return response.json()
         });
+       
 
     return planetsReturned;
-}
+};
 
 function pickPlanet(planets) {
     window.addEventListener('load', () => {
-        fetch('https://handlers.education.launchcode.org/static/planets.json').then(function (response) {
-            const missionTarget = document.getElementById('missionTarget');
-                let index = Math.floor(Math.random() * (plantaryData.length));
-                missionTarget.innerHTML +=`
-                <div>
-                <h2>Mission Destination</h2>
-                <ol>
-                        <li>Name: ${planetaryData[index].name}</li>
-                        <li>Diameter: ${planetaryData[index].diameter}</li>
-                        <li>Star: ${planetaryData[index].star}</li>
-                        <li>Distance: ${planetaryData[index].distance}</li>
-                        <li>Moons: ${planetaryData[index].moons}</li>
-                    </ol>
-                    <img id='missionTarget img' src ${planetaryData[index].image}></img>
-                </div>`
-               
+      
+                missionTarget = document.getElementById('missionTarget');
+                let index = Math.floor(Math.random() * plantaryData.length);
+                return planets[index]
+                
                     
-        });
     });
 }
    
 
 
-module.exports.addDestinationInfo = addDestinationInfo;
-module.exports.validateInput = validateInput;
-module.exports.formSubmission = formSubmission;
-module.exports.pickPlanet = pickPlanet; 
-module.exports.myFetch = myFetch;
+// module.exports.addDestinationInfo = addDestinationInfo;
+// module.exports.validateInput = validateInput;
+// module.exports.formSubmission = formSubmission;
+// module.exports.pickPlanet = pickPlanet; 
+// module.exports.myFetch = myFetch;
