@@ -111,14 +111,14 @@ async function myFetch(listedPlanets) {
 };
 
 function pickPlanet(planets) {
-    window.addEventListener('load', () => {
+    
       
                 missionTarget = document.getElementById('missionTarget');
-                let index = Math.floor(Math.random() * plantaryData.length);
+                let index = Math.floor(Math.random() * planets.length);
                 return planets[index]
                 
                     
-    });
+    
 }
    
 
