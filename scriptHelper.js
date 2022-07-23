@@ -26,40 +26,51 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
 function validateInput(testInput) {
    document.addEventListener('submit', function(event) {
-        ;
+        const pilotName = document.getElementById('pilotName');
+        const copilotName = document.getElementById('copilotName');
+        const fuelLevel = document.getElementById('fuelLevel');
+        const cargoMass = document.getElementById('cargoMass');
 
-        const pilotName = document.querySelector('[name=pilotName').value;
-        const copilotName = document.querySelector('[name=copilotName]').value;
-        const fuelLevel = document.querySelector('[name=fuelLevel]').value;
-        const cargoMass = document.querySelector('[name=cargoLevel]').value;
-            let emptyField = '';
-            let nonAlpha = '';
-            let nonNumeric = '';
-
-            if(!pilotName || !copilotName || !fuelLevel || !cargoMass) {
-                emptyField = "All fields must be filled in.";
-                event.preventDefault()
-            }
-
-            if (pilotName === Number || copilotName === Number) {
-            nonAlpha = 'Pilots names must be alpha characters.';}
-
-            if (isNaN(fuelLevel) || isNaN(cargoMass)) {
-                nonNumeric = 'Fuel level and Cargo Mass must be numeric';
-            }
-
-            if(emptyField || nonAlpha || nonNumeric) {
-                let errorMessage = `${emptyField}${nonalpha}${nonNumeric}`;
-                alert(errorMessage);
-            }
-
-            else {formSubmission(event, pilotName, coPilotName, fuelLevel, cargoMass);}
+            formSubmission(document, pilotName, coPilotName, fuelLevel, cargoMass);
             event.preventDefault()
    });
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
    
+    const pilotName = document.querySelector('[name=pilotName').value;
+        const copilotName = document.querySelector('[name=copilotName]').value;
+        const fuelLevel = document.querySelector('[name=fuelLevel]').value;
+        const cargoMass = document.querySelector('[name=cargoLevel]').value;
+
+            // if(!pilotName || !copilotName || !fuelLevel || !cargoMass) {
+            //     emptyField = "All fields must be filled in.";
+            //     event.preventDefault()
+            // }
+            if (validateInput(pilotName) == ''){
+                window.alert('Must fill in Pilot Name');
+                validateInput.preventDefault()
+            }
+            if (validateInput(copilotName) == ''){
+                window.alert('Must fill in Copilot Name');
+                validateInput.preventDefault()
+            }
+            if (validateInput(fuelLevel) == ''){
+                window.alert('Must fill in Fuel Level');
+                validateInput.preventDefault()
+            }
+            if (validateInput(cargoMass) == ''){
+                window.alert('Must fill in Cargo Mass');
+                validateInput.preventDefault()
+            }
+
+            if (pilotName === Number || copilotName === Number) {
+                window.alert('Pilot & Copilot names cannot be numeric')
+
+            if (isNaN(fuelLevel) || isNaN(cargoMass)) {
+                window.alert('Fuel level and Cargo Mass must be numeric');
+            }
+            }
         launchStatus.innerHTML += `
         <div>
            <ol>
