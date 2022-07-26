@@ -18,12 +18,17 @@ window.addEventListener("load", function() {
        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
         let planetaryData = pickPlanet(listedPlanets);
         addDestinationInfo(document, planetaryData.name, planetaryData.diameter, planetaryData.star, planetaryData.distance, planetaryData.moons, planetaryData.image)
-   }) 
-            document.addEventListener('submit', function(event){
-            const pilotName = document.querySelector('[name=pilotName').value;
-            const copilotName = document.querySelector('[name=copilotName]').value;
-            const fuelLevel = document.querySelector('[name=fuelLevel]').value;
-            const cargoMass = document.querySelector('[name=cargoLevel]').value
-            formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass);
-        })
-    });
+   }); 
+            faultyItems.style.visibility = 'hidden';
+
+            let form = document.querySelector("form")
+            form.addEventListener('submit', function(event){
+               event.preventDefault()
+            const pilotName = document.querySelector('input[name=pilotName]').value;
+            const copilotName = document.querySelector('input[name=copilotName]').value;
+            const fuelLevel = document.querySelector('input[name=fuelLevel]').value;
+            const cargoMass = document.querySelector('input[name=cargoMass]').value
+            const list = document.getElementById('faultyItems')
+            return formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoMass);
+       })
+     });
